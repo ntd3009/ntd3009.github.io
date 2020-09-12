@@ -798,8 +798,6 @@ section.get-in-touch {
 }
 
 .get-in-touch .btn-wrap a:hover {
-  animation: headShake 1s;
-  -webkit-animation: headShake 1s;
   opacity: 1;
   background-color: var(--title-color);
 }
