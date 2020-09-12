@@ -111,10 +111,6 @@ li {
   -o-border-radius: 4px;
 }
 
-.btn:hover {
-  opacity: .8;
-}
-
 .color-primary {
   color: var(--primary-color);
 }
@@ -804,6 +800,8 @@ section.get-in-touch {
 .get-in-touch .btn-wrap a:hover {
   animation: headShake 1s;
   -webkit-animation: headShake 1s;
+  opacity: 1;
+  background-color: var(--title-color);
 }
 
 @-webkit-keyframes headShake {
