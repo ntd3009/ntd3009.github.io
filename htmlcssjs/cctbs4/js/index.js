@@ -4,22 +4,25 @@ $(document).ready(function () {
   const header = document.getElementById('header');
   const btnOpenNavHeader = document.getElementById('js-show-hide-navbar');
   const navbar = document.getElementById('navbar-header');
-
   const goTopBtn = document.getElementById('js-go-top');
-  goTopBtn.addEventListener('click', function () {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  });
 
+  // go to top btn
   let goTop = function () {
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-      goTopBtn.style.display = "flex";
+    goTopBtn.addEventListener('click', function () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+    window.addEventListener("scroll", function () {
+      if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+        goTopBtn.style.display = "flex";
 
-    } else {
-      goTopBtn.style.display = "none";
-    }
+      } else {
+        goTopBtn.style.display = "none";
+      }
+    });
   }
-
+  goTop()
+  //  sticky header
   let stickyHeader = function () {
     let stickyStatus = false;
     window.addEventListener("scroll", function () {
@@ -30,7 +33,7 @@ $(document).ready(function () {
           stickyStatus = true;
           header.classList.add('sticky', 'header-moved-up');
         }
-        if(y > (sticky + 680)) {
+        if (y > (sticky + 680)) {
           header.classList.remove('header-moved-up');
         }
       } else {
@@ -41,9 +44,8 @@ $(document).ready(function () {
       }
     })
   }
-
   stickyHeader();
-
+  // header mobile
   let openNavbar = function () {
     btnOpenNavHeader.addEventListener('click', function () {
       navbar.classList.toggle('open');
@@ -109,17 +111,7 @@ $(document).ready(function () {
   }
   megaMenuRps();
 
-  // 
-  // _this.find('.hero [data-fancybox]').fancybox({
-  //   youtube: {
-  //     controls: 1,
-  //     showinfo: 0
-  //   },
-  //   vimeo: {
-  //     color: 'f00'
-  //   }
-  // });
-  //
+  // client - owl slider
   _this.find('.clients .owl-carousel.client-items').owlCarousel({
     margin: 30,
     nav: false,
@@ -139,56 +131,53 @@ $(document).ready(function () {
       }
     }
   });
-  //
-  let counter = _this.find('.js-count');
+  // counter
+  let counterAction = function () {
+    let counter = _this.find('.js-count');
 
-  function startCounter() {
-    counter.each(function () {
-      let that = jQuery(this);
-      let countStart = that.attr('data-start')
-      let countTo = that.attr('data-end');
-      that.text(countStart);
-      jQuery({
-        countNum: that.text()
-      }).animate({
-        countNum: countTo
-      }, {
-        duration: 3000,
-        easing: 'linear',
-        step: function () {
-          that.text(setNumber(that, this.countNum));
-        },
-        complete: function () {
-          that.text(setNumber(that, this.countNum));
-        }
+    function startCounter() {
+      counter.each(function () {
+        let that = jQuery(this);
+        let countStart = that.attr('data-start')
+        let countTo = that.attr('data-end');
+        that.text(countStart);
+        jQuery({
+          countNum: that.text()
+        }).animate({
+          countNum: countTo
+        }, {
+          duration: 3000,
+          easing: 'linear',
+          step: function () {
+            that.text(setNumber(that, this.countNum));
+          },
+          complete: function () {
+            that.text(setNumber(that, this.countNum));
+          }
+        });
       });
+    }
+
+    function setNumber($this, num) {
+      var rs = Math.floor(num);
+      return rs;
+    }
+
+    function isAnyPartOfElementInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+      const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
+      const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) >= 0);
+      const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) >= 0);
+
+      return (vertInView && horInView);
+    }
+    window.addEventListener('scroll', function () {
+      if (isAnyPartOfElementInViewport(counter[0])) {
+        startCounter();
+      }
     });
   }
+  counterAction();
 
-  function setNumber($this, num) {
-    var rs = Math.floor(num);
-    return rs;
-  }
-
-  function isAnyPartOfElementInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-    const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) >= 0);
-    const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) >= 0);
-
-    return (vertInView && horInView);
-  }
-  // 
-  jQuery(window).on('scroll resize', function () {
-    if (isAnyPartOfElementInViewport(counter[0])) {
-      startCounter();
-      jQuery(window).off('scroll resize');
-    }
-    // if(jQuery(window).width() >= 992) {
-    // }
-    // stickyHeader();
-    goTop()
-
-  }).trigger('scroll resize');
 });
