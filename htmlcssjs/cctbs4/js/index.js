@@ -106,6 +106,8 @@ $(document).ready(function () {
     nav: false,
     dots: false,
     loop: true,
+    autoplay: true,
+    autoplayTimeout: 8000,
     responsive: {
       0: {
         items: 2
