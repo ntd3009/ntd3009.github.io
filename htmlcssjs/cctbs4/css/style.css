@@ -434,10 +434,6 @@ header.header {
 .header-inner .navbar.open+.btn-navbar svg {
   opacity: 1;
 }
-
-main.main {
-  padding-top: 6.8rem;
-}
 /* hero */
 
 section.hero {
@@ -1083,7 +1079,7 @@ section.cta {
     -moz-transform: translateY(-100%);
     -ms-transform: translateY(-100%);
     -o-transform: translateY(-100%);
-}
+  }
 
   .header-inner .btn-navbar {
     display: none;
@@ -1188,6 +1184,10 @@ section.cta {
     left: 100%;
     top: 0;
     margin-top: -1.9rem;
+  }
+
+  main.main {
+    padding-top: 6.8rem;
   }
 
   .features .feature-heading {
@@ -1329,7 +1329,7 @@ section.cta {
   }
 
   .hero-content {
-    padding: 8rem 0 10rem;
+    padding: 6rem 0 10rem;
   }
 
   .hero .text {
