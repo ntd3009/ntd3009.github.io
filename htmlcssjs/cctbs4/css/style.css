@@ -1063,6 +1063,9 @@ section.cta {
     width: 100%;
     background-color: #fff;
     z-index: 999;
+  }
+  
+  header.header.sticky:not(.header-move-up) {
     box-shadow: 0 1px 10px rgba(140, 152, 164, 0.125);
   }
 

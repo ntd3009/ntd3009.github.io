@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const $ = jQuery(this);
+  const _this = jQuery(this);
 
   const header = document.getElementById('header');
   const btnOpenNavHeader = document.getElementById('js-show-hide-navbar');
@@ -11,19 +11,38 @@ $(document).ready(function () {
     document.documentElement.scrollTop = 0;
   });
 
-  let stickyHeader = function () {
-    var sticky = header.offsetTop;
-    if(window.pageYOffset > sticky) {
-      header.classList.add('sticky');
-      header.classList.add('header-moved-up');
-      if(window.pageYOffset > (sticky + 1000)) {
-        header.classList.remove('header-moved-up');
-      }
+  let goTop = function () {
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+      goTopBtn.style.display = "flex";
+
     } else {
-      header.classList.remove('sticky');
-      header.classList.remove('header-moved-up');
+      goTopBtn.style.display = "none";
     }
   }
+
+  let stickyHeader = function () {
+    let stickyStatus = false;
+    window.addEventListener("scroll", function () {
+      let sticky = header.offsetTop;
+      let y = pageYOffset;
+      if (y > sticky) {
+        if (!stickyStatus) {
+          stickyStatus = true;
+          header.classList.add('sticky', 'header-moved-up');
+        }
+        if(y > (sticky + 680)) {
+          header.classList.remove('header-moved-up');
+        }
+      } else {
+        if (stickyStatus) {
+          stickyStatus = false;
+          header.classList.remove('sticky');
+        }
+      }
+    })
+  }
+
+  stickyHeader();
 
   let openNavbar = function () {
     btnOpenNavHeader.addEventListener('click', function () {
@@ -38,8 +57,8 @@ $(document).ready(function () {
         navbar.classList.add('nav-mobile');
       }
 
-      let megaDropLv1 = $.find('.nav-mobile .mega-drop-lv1');
-      let megaDropLv2 = $.find('.nav-mobile .mega-drop-lv2');
+      let megaDropLv1 = _this.find('.nav-mobile .mega-drop-lv1');
+      let megaDropLv2 = _this.find('.nav-mobile .mega-drop-lv2');
 
       let removeAllActive = function (items) {
         items.each(function (i) {
@@ -91,7 +110,7 @@ $(document).ready(function () {
   megaMenuRps();
 
   // 
-  // $.find('.hero [data-fancybox]').fancybox({
+  // _this.find('.hero [data-fancybox]').fancybox({
   //   youtube: {
   //     controls: 1,
   //     showinfo: 0
@@ -101,7 +120,7 @@ $(document).ready(function () {
   //   }
   // });
   //
-  $.find('.clients .owl-carousel.client-items').owlCarousel({
+  _this.find('.clients .owl-carousel.client-items').owlCarousel({
     margin: 30,
     nav: false,
     dots: false,
@@ -121,26 +140,26 @@ $(document).ready(function () {
     }
   });
   //
-  let counter = $.find('.js-count');
+  let counter = _this.find('.js-count');
 
   function startCounter() {
     counter.each(function () {
-      let $ = jQuery(this);
-      let countStart = $.attr('data-start')
-      let countTo = $.attr('data-end');
-      $.text(countStart);
+      let that = jQuery(this);
+      let countStart = that.attr('data-start')
+      let countTo = that.attr('data-end');
+      that.text(countStart);
       jQuery({
-        countNum: $.text()
+        countNum: that.text()
       }).animate({
         countNum: countTo
       }, {
         duration: 3000,
         easing: 'linear',
         step: function () {
-          $.text(setNumber($, this.countNum));
+          that.text(setNumber(that, this.countNum));
         },
         complete: function () {
-          $.text(setNumber($, this.countNum));
+          that.text(setNumber(that, this.countNum));
         }
       });
     });
@@ -161,16 +180,6 @@ $(document).ready(function () {
     return (vertInView && horInView);
   }
   // 
-  let goTop = function () {
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-      goTopBtn.style.display = "flex";
-
-    } else {
-      goTopBtn.style.display = "none";
-    }
-  }
-  // 
-
   jQuery(window).on('scroll resize', function () {
     if (isAnyPartOfElementInViewport(counter[0])) {
       startCounter();
@@ -178,7 +187,7 @@ $(document).ready(function () {
     }
     // if(jQuery(window).width() >= 992) {
     // }
-    stickyHeader();
+    // stickyHeader();
     goTop()
 
   }).trigger('scroll resize');
