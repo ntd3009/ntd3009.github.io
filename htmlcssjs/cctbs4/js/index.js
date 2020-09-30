@@ -15,8 +15,13 @@ $(document).ready(function () {
     var sticky = header.offsetTop;
     if(window.pageYOffset > sticky) {
       header.classList.add('sticky');
+      header.classList.add('header-moved-up');
+      if(window.pageYOffset > (sticky + 1000)) {
+        header.classList.remove('header-moved-up');
+      }
     } else {
       header.classList.remove('sticky');
+      header.classList.remove('header-moved-up');
     }
   }
 

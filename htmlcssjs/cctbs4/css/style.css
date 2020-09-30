@@ -294,6 +294,7 @@ input {
 header.header {
   position: relative;
   z-index: 999;
+  background-color: #fff;
 }
 
 .header-inner .header-logo {
@@ -426,6 +427,9 @@ header.header {
   opacity: 1;
 }
 
+main.main {
+  padding-top: 6.8rem;
+}
 /* hero */
 
 section.hero {
@@ -1045,14 +1049,13 @@ section.cta {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #0000;
     z-index: 99;
     transition: all .3s;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -ms-transition: all .3s;
     -o-transition: all .3s;
-}
+  }
 
   header.header.sticky {
     position: fixed !important;
@@ -1062,6 +1065,14 @@ section.cta {
     z-index: 999;
     box-shadow: 0 1px 10px rgba(140, 152, 164, 0.125);
   }
+
+  header.header.sticky.header-moved-up {
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+}
 
   .header-inner .btn-navbar {
     display: none;
