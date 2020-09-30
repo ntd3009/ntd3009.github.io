@@ -1,13 +1,8 @@
 $(document).ready(function () {
   const _this = jQuery(this);
-
-  const header = document.getElementById('header');
-  const btnOpenNavHeader = document.getElementById('js-show-hide-navbar');
-  const navbar = document.getElementById('navbar-header');
-  const goTopBtn = document.getElementById('js-go-top');
-
   // go to top btn
   let goTop = function () {
+    const goTopBtn = document.getElementById('js-go-top');
     goTopBtn.addEventListener('click', function () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
@@ -24,6 +19,7 @@ $(document).ready(function () {
   goTop()
   //  sticky header
   let stickyHeader = function () {
+    const header = document.getElementById('header');
     let stickyStatus = false;
     window.addEventListener("scroll", function () {
       let sticky = header.offsetTop;
@@ -46,57 +42,52 @@ $(document).ready(function () {
   }
   stickyHeader();
   // header mobile
-  let openNavbar = function () {
-    btnOpenNavHeader.addEventListener('click', function () {
-      navbar.classList.toggle('open');
-    });
-  };
-
   let megaMenu = function () {
-    const mb = window.matchMedia("(max-width: 991px)");
-    if (mb.matches) {
-      let megaDropLv1 = _this.find('.mega-drop-lv1');
-      let megaDropLv2 = _this.find('.mega-drop-lv2');
+    const btnOpenNavHeader = document.getElementById('js-show-hide-navbar');
+    const navbar = document.getElementById('navbar-header');
+    let openNavbar = function () {
+      btnOpenNavHeader.addEventListener('click', function () {
+        navbar.classList.toggle('open');
+      });
+    };
+    
+    let megaDropLv1 = _this.find('.mega-drop-lv1');
+    let megaDropLv2 = _this.find('.mega-drop-lv2');
 
-      let removeAllActive = function (items) {
-        items.each(function (i) {
-          let hasClass = this.classList.contains('active');
-          if (hasClass) {
-            this.classList.remove('active');
+    let removeAllActive = function (items) {
+      items.each(function (i) {
+        let hasClass = this.classList.contains('active');
+        if (hasClass) {
+          this.classList.remove('active');
+        }
+      });
+    }
+
+    let eventAc = function (dom, dom2) {
+      let heads = dom.children('.btn-drop-menu');
+      heads.each(function (i) {
+        this.addEventListener('click', () => {
+          let wrap = this.parentNode;
+          let currentHasAc = wrap.classList.contains('active');
+          if (!currentHasAc) {
+            removeAllActive(dom);
+            if (dom2) {
+              removeAllActive(dom2);
+            }
+            wrap.classList.add('active');
+          } else {
+            removeAllActive(dom);
+            if (dom2) {
+              removeAllActive(dom2);
+            }
           }
         });
-      }
-
-      let eventAc = function (dom, dom2) {
-        let heads = dom.children('.btn-drop-menu');
-        heads.each(function (i) {
-          this.addEventListener('click', () => {
-            let wrap = this.parentNode;
-            let currentHasAc = wrap.classList.contains('active');
-            if (!currentHasAc) {
-              removeAllActive(dom);
-              if (dom2) {
-                removeAllActive(dom2);
-              }
-              wrap.classList.add('active');
-            } else {
-              removeAllActive(dom);
-              if (dom2) {
-                removeAllActive(dom2);
-              }
-            }
-          });
-        });
-      }
-
-      openNavbar();
-      eventAc(megaDropLv1, megaDropLv2);
-      eventAc(megaDropLv2);
-    } else {
-      if (navbar.classList.contains('nav-mobile')) {
-        navbar.classList.remove('nav-mobile')
-      }
+      });
     }
+
+    openNavbar();
+    eventAc(megaDropLv1, megaDropLv2);
+    eventAc(megaDropLv2);
   }
   megaMenu();
 
