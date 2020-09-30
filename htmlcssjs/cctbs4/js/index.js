@@ -1,5 +1,6 @@
 $(document).ready(function () {
   const _this = jQuery(this);
+
   // go to top btn
   let goTop = function () {
     const goTopBtn = document.getElementById('js-go-top');
@@ -16,7 +17,8 @@ $(document).ready(function () {
       }
     });
   }
-  goTop()
+  goTop();
+
   //  sticky header
   let stickyHeader = function () {
     const header = document.getElementById('header');
@@ -41,6 +43,7 @@ $(document).ready(function () {
     })
   }
   stickyHeader();
+
   // header mobile
   let megaMenu = function () {
     const btnOpenNavHeader = document.getElementById('js-show-hide-navbar');
@@ -50,7 +53,7 @@ $(document).ready(function () {
         navbar.classList.toggle('open');
       });
     };
-    
+
     let megaDropLv1 = _this.find('.mega-drop-lv1');
     let megaDropLv2 = _this.find('.mega-drop-lv2');
 
@@ -115,6 +118,7 @@ $(document).ready(function () {
   let counterEvent = function () {
     let counter = _this.find('.js-count');
     let counted = false;
+
     function startCounter() {
       counter.each(function () {
         let that = jQuery(this);
@@ -162,4 +166,5 @@ $(document).ready(function () {
     });
   }
   counterEvent();
+  
 });
