@@ -132,9 +132,9 @@ $(document).ready(function () {
     }
   });
   // counter
-  let counterAction = function () {
+  let counterEvent = function () {
     let counter = _this.find('.js-count');
-
+    let counted = false;
     function startCounter() {
       counter.each(function () {
         let that = jQuery(this);
@@ -174,10 +174,12 @@ $(document).ready(function () {
     }
     window.addEventListener('scroll', function () {
       if (isAnyPartOfElementInViewport(counter[0])) {
-        startCounter();
+        if (!counted) {
+          startCounter();
+          counted = true;
+        }
       }
     });
   }
-  counterAction();
-
+  counterEvent();
 });
