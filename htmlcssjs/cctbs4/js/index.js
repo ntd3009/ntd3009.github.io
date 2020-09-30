@@ -160,7 +160,7 @@ $(document).ready(function () {
   }
   // 
   let goTop = function () {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
       goTopBtn.style.display = "flex";
 
     } else {
