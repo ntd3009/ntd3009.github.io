@@ -395,6 +395,14 @@ header.header {
 }
 
 .header-inner .btn-navbar {
+  display: inline-flex;
+  width: 4.3rem;
+  height: 4.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-inner .btn-navbar .btn-navbar-icon {
   width: 1.4rem;
   height: 1rem;
   position: relative;
@@ -404,7 +412,7 @@ header.header {
   border-bottom: 2px solid currentColor;
 }
 
-.header-inner .navbar.open+.btn-navbar {
+.header-inner .navbar.open+.btn-navbar .btn-navbar-icon {
   border-color: transparent;
 }
 
@@ -1216,6 +1224,11 @@ section.cta {
     padding: .8rem 0;
   }
 
+  .header-inner .header-logo {
+    padding: 0.48rem 0;
+    max-width: 11.2rem;
+  }
+
   .header-inner .navbar-items .navbar-item {
     width: 100%;
   }
@@ -1329,6 +1342,10 @@ section.cta {
 
   .cta .heading {
     margin-bottom: 3.2rem;
+  }
+
+  #js-go-top {
+    display: none !important;
   }
 }
 
