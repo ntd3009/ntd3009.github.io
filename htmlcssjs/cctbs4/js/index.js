@@ -48,29 +48,31 @@ $(document).ready(function () {
   let megaMenu = function () {
     const btnOpenNavHeader = document.getElementById('js-show-hide-navbar');
     const navbar = document.getElementById('navbar-header');
+
     let openNavbar = function () {
       btnOpenNavHeader.addEventListener('click', function () {
         navbar.classList.toggle('open');
       });
     };
 
-    let megaDropLv1 = _this.find('.mega-drop-lv1');
-    let megaDropLv2 = _this.find('.mega-drop-lv2');
+    let megaDropLv1 = document.querySelectorAll('#navbar-header .mega-drop-lv1');
+    let megaDropLv2 = document.querySelectorAll('#navbar-header .mega-drop-lv2');
 
     let removeAllActive = function (items) {
-      items.each(function (i) {
-        let hasClass = this.classList.contains('active');
+      items.forEach((item) => {
+        let hasClass = item.classList.contains('active');
         if (hasClass) {
-          this.classList.remove('active');
+          item.classList.remove('active');
         }
       });
     }
 
     let eventAc = function (dom, dom2) {
-      let heads = dom.children('.btn-drop-menu');
-      heads.each(function (i) {
-        this.addEventListener('click', () => {
-          let wrap = this.parentNode;
+      let heads = document.querySelectorAll('#navbar-header .btn-drop-menu');
+
+      heads.forEach((head) => {
+        head.addEventListener('click', () => {
+          let wrap = head.parentNode;
           let currentHasAc = wrap.classList.contains('active');
           if (!currentHasAc) {
             removeAllActive(dom);
@@ -166,5 +168,5 @@ $(document).ready(function () {
     });
   }
   counterEvent();
-  
+
 });
