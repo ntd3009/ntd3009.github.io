@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draggable</title>
+  <style>
+    body {
+      margin: 0;
+      background: rgba(0, 0, 0, .5)
+    }
+
+    #element {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      top: 50px;
+      left: 50px;
+      text-align: center;
+      background: #e33;
+      box-shadow: 0 0 5px black;
+      cursor: move;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="element"></div>
+  <script>
+    document.addEventListener('domContentLoaded', function () {
+      console.log(1);
+      var el = document.getElementById('element');
+      var initX, initY, firstX, firstY;
+
+      el.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        initX = this.offsetLeft;
+        initY = this.offsetTop;
+        firstX = e.pageX;
+        firstY = e.pageY;
+        this.addEventListener('mousemove', dragIt, false);
+        window.addEventListener('mouseup', function () {
+          object.removeEventListener('mousemove', dragIt, false);
+        }, false)
+      }, false);
+
+      function dragIt(e) {
+        this.style.left = `${initX + e.pageX - firstX}px`;
+        this.style.top = `${initY + e.pageY - firstY}px`
+      }
+
+      el.addEventListener('touchstart', function (e) {
+
+        e.preventDefault();
+        initX = this.offsetLeft;
+        initY = this.offsetTop;
+        var touch = e.touches;
+        firstX = touch[0].pageX;
+        firstY = touch[0].pageY;
+
+        this.addEventListener('touchmove', swipeIt, false);
+
+        window.addEventListener('touchend', function (e) {
+          e.preventDefault();
+          el.removeEventListener('touchmove', swipeIt, false);
+        }, false);
+
+      }, false);
+
+      function swipeIt(e) {
+        var contact = e.touches;
+        this.style.left = `${initX + contact[0].pageX - firstX}px`;
+        this.style.top = `${initY + contact[0].pageY - firstY}px`;
+      }
+    });
+
+  </script>
+</body>
+
+</html>
