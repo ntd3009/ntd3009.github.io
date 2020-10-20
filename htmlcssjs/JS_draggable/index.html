@@ -29,8 +29,8 @@
 <body>
   <div id="element"></div>
   <script>
-    document.addEventListener('domContentLoaded', function () {
-      console.log(1);
+    window.addEventListener('DOMContentLoaded', function () {
+      console.log('Draggable');
       var el = document.getElementById('element');
       var initX, initY, firstX, firstY;
 
@@ -42,7 +42,7 @@
         firstY = e.pageY;
         this.addEventListener('mousemove', dragIt, false);
         window.addEventListener('mouseup', function () {
-          object.removeEventListener('mousemove', dragIt, false);
+          el.removeEventListener('mousemove', dragIt, false);
         }, false)
       }, false);
 
